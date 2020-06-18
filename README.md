@@ -22,3 +22,7 @@ import Config
 
 ## Features
 Coming soon!
+
+## TODO
+Provide bot token via environment variable.  
+Build out commands
