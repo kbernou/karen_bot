@@ -1,6 +1,6 @@
 defmodule Karen.Helper do
   def get_args(command) do
-    {start, _} = :binary.match(command, " ")
+    {start, _} = :binary.match(command, "karen ")
     String.slice(command, start + 1, String.length(command))
   end
 end

@@ -6,12 +6,12 @@ defmodule Karen.Consumer.Command do
 
   def handle(command, message)
 
-  def handle("!ping", msg) do
+  def handle("ping", msg) do
     Ping.handle(msg)
   end
 
-  def handle("!help", _) do
-    Help.handle
+  def handle("help", _) do
+    Help.handle()
   end
 
   def handle(_, _) do

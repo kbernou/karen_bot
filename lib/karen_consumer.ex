@@ -14,17 +14,18 @@ defmodule Karen.Consumer do
   @spec handle_event(Nostrum.Consumer.event()) :: any()
   def handle_event({:MESSAGE_CREATE, msg, _ws_state}) do
     # get the root command
-    case :binary.match(msg.content, " ") do
-      {start, _} ->
+    case :binary.match(msg.content, "karen ") do
+      {_, cmd_start} ->
         fn ->
-          cmd = String.slice(msg.content, 0, start)
+          cmd = String.slice(msg.content, cmd_start, String.length(msg.content))
           Command.handle(cmd, msg)
-          # TODO ...then do what?
+          # TODO ...then what? Should commands handle their own responses, or
+          # should that be piped to a "reply(action)" function?
         end
 
       # provide some feedback about things going wrong
       :nomatch ->
-        Api.create_message(msg.channel_id, "Bad command, master.")
+        :noop
     end
   end
 
