@@ -1,21 +1,24 @@
 # Karen
 
-**TODO: Add description**
+Karen is a general usage Discord bot. She isn't meant to do anything in 
+particular. She exists mostly as programming practice and because why the heck
+not.
 
 ## Installation
+Clone the repo.  
+Create `config/config.exs` ([example](#Example-Config) below)  
+Enter the bot's token in `/config/config.exs`.  
+Get dependencies with `mix deps.get`.  
+Run the application.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `karen_bot` to your list of dependencies in `mix.exs`:
-
+## Example Config
+`config/config.exs`
 ```elixir
-def deps do
-  [
-    {:karen_bot, "~> 0.1.0"}
-  ]
-end
+import Config
+  config :nostrum,
+    token: "123abc",  # Bot token
+    num_shards: :auto # Number of shards to run the bot under, or `:auto`
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/karen_bot](https://hexdocs.pm/karen_bot).
-
+## Features
+Coming soon!
