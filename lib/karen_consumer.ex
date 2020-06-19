@@ -1,7 +1,6 @@
 defmodule Karen.Consumer do
   use Nostrum.Consumer
 
-  alias Nostrum.Api
   alias Karen.Consumer.Command
   alias Karen.Helper
 
@@ -17,8 +16,9 @@ defmodule Karen.Consumer do
     IO.puts(msg.content)
 
     case :binary.match(String.downcase(msg.content), "karen ") do
-      {_, cmd_start} ->
-        cmd = String.slice(msg.content, cmd_start, String.length(msg.content))
+      {_, _} ->
+        cmd = Enum.at(String.split(msg.content, " "), 1)
+        # cmd = String.slice(msg.content, cmd_start, String.length(msg.content))
         Command.handle(cmd, msg)
         :done
 
