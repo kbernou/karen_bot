@@ -1,4 +1,6 @@
 defmodule Karen.Consumer.Command do
+  alias Nostrum.Api
+
   alias Karen.Consumer.Command.{
     Ping,
     Help
@@ -10,12 +12,11 @@ defmodule Karen.Consumer.Command do
     Ping.handle(msg)
   end
 
-  def handle("help", _) do
-    Help.handle()
+  def handle("help", msg) do
+    Help.handle(msg)
   end
 
-  def handle(_, _) do
-    # What did they even send?
-    "I don't understand."
+  def handle(_, msg) do
+    Api.create_message(msg.channel_id, "That's not something I can do.")
   end
 end
