@@ -21,7 +21,7 @@ import Config
 ```
 
 ## Features
-Coming soon!
+Coming soon!™
 
 ## TODO
 Provide bot token via environment variable.  
