@@ -1,6 +1,6 @@
 # Karen
 
-Karen is a general usage Discord bot. She isn't meant to do anything in 
+[Karen](https://spongebob.fandom.com/wiki/Karen_Plankton) is a general usage Discord bot. She isn't meant to do anything in 
 particular. She exists mostly as programming practice and because why the heck
 not.
 
