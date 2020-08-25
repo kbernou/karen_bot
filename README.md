@@ -26,3 +26,4 @@ Coming soon!
 ## TODO
 Provide bot token via environment variable.  
 Build out commands.
+Use Elixir's Releases for updates and deployment.
