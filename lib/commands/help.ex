@@ -4,8 +4,9 @@ defmodule Karen.Consumer.Command.Help do
   def handle(msg) do
     out = """
     Here are my commands:
-    * Help - Tells you what I can do.
-    * Graph - Produces a diagram from text. Refer to GraphViz docs for usage.
+    * help - Tells you what I can do. Duh.
+    * ping - Tells you if I'm alive.
+    * graph - Produces a diagram from text. Refer to GraphViz docs for usage.
     """
 
     Api.create_message(msg.channel_id, out)
