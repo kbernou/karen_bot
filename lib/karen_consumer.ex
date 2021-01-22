@@ -15,16 +15,22 @@ defmodule Karen.Consumer do
     # get the root command
     IO.puts(msg.content)
 
-    case :binary.match(String.downcase(msg.content), "karen ") do
-      {_, _} ->
+    forKaren = msg.content
+      |> String.downcase
+      |> String.starts_with?("karen ")
+
+    case forKaren do
+      true ->
         cmd = Enum.at(String.split(msg.content, " "), 1)
-        # cmd = String.slice(msg.content, cmd_start, String.length(msg.content))
         Command.handle(cmd, msg)
         :done
 
-      # This likely wasn't a command for Karen
-      :nomatch ->
-        :noop
+      # This likely wasn't a command for Karen, but might mention her
+      false ->
+        case String.contains?(msg.content, "<@!470388907834474497>") do
+          true -> Command.AtMe.handle(msg)
+          false -> :noop
+        end
     end
   end
 
