@@ -1,11 +1,16 @@
 defmodule Karen.Consumer.Command do
+@moduledoc """
+Interface for commands.
+
+Feels like there's a better way to handle this...
+"""
   alias Nostrum.Api
 
-  # is there a better way for it to know what commands are available?
   alias Karen.Consumer.Command.{
     Ping,
     Help,
-    Graph
+    Graph,
+    AtMe
   }
 
   def handle(command, message)
@@ -22,8 +27,16 @@ defmodule Karen.Consumer.Command do
     Graph.handle(msg)
   end
 
+  def handle("atMe", msg) do
+    AtMe.handle(msg)
+  end
+
   def handle(cmd, msg) do
-    IO.puts("Command issued: #{cmd}")
+    if String.contains?(msg.content, "<@!470388907834474497>") do
+      AtMe.handle(msg)
+    else
+      IO.puts("Command issued: #{cmd}")
     Api.create_message(msg.channel_id, "That's not something I can do.")
+    end
   end
 end

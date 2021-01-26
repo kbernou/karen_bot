@@ -4,39 +4,36 @@ defmodule Karen.Consumer do
   alias Karen.Consumer.Command
   alias Karen.Helper
 
-  @spec start_link :: Supervisor.on_start()
   def start_link do
     Consumer.start_link(__MODULE__)
   end
 
-  @impl true
-  @spec handle_event(Nostrum.Consumer.event()) :: any()
   def handle_event({:MESSAGE_CREATE, msg, _ws_state}) do
-    # get the root command
     IO.puts(msg.content)
+    process_command(msg)
+    process_mention(msg)
 
-    forKaren = msg.content
-      |> String.downcase
-      |> String.starts_with?("karen ")
-
-    case forKaren do
-      true ->
-        cmd = Enum.at(String.split(msg.content, " "), 1)
-        Command.handle(cmd, msg)
-        :done
-
-      # This likely wasn't a command for Karen, but might mention her
-      false ->
-        case String.contains?(msg.content, "<@!470388907834474497>") do
-          true -> Command.AtMe.handle(msg)
-          false -> :noop
-        end
-    end
+    :done
   end
 
   # Default event handler, consumer will crash without a method definition for
   # each event type
   def handle_event(_event) do
     :noop
+  end
+
+  defp process_command(msg) do
+    if Helper.is_command?(msg.content) do
+        msg.content
+        |> String.split(" ")
+        |> Enum.at(1)
+        |> Command.handle(msg)
+    end
+  end
+
+  defp process_mention(msg) do
+    if Helper.mentions_karen?(msg.content) do
+      Command.handle("atMe", msg)
+    end
   end
 end

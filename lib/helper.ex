@@ -1,6 +1,19 @@
 defmodule Karen.Helper do
-  def get_args(command) do
-    {start, _} = :binary.match(command, "karen ")
-    String.slice(command, start + 1, String.length(command))
+  @doc """
+  Returns true if the message is a command for Karen. Otherwise returns false.
+  """
+  def is_command?(content) do
+    content
+    |> String.downcase
+    |> String.starts_with?("karen ")
+  end
+
+  @doc """
+  Returns true if the `content` mentions Karen. Otherwise returns false.
+  """
+  def mentions_karen?(content) do
+    content
+    |> String.downcase
+    |> String.contains?("<@!470388907834474497>")
   end
 end
