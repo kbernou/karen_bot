@@ -34,9 +34,12 @@ defmodule Karen.Consumer.Command.Graph do
   defp clean_code(text) do
     # Should be possible to use capture groups to have the regex strip leading
     # and trailing quotes but I don't feel like figuring that out just now
-    String.trim(
-      Enum.at(Regex.run(~r/\".*\"/, List.last(String.split(String.replace(text, "\n", " "), "karen graph "))), 0),
-      "\""
-    )
+
+    processed_text = text
+    |> String.replace("\n", " ")
+    |> String.split("karen graph ")
+    |> List.last
+
+    Regex.run(~r/\".*\"/, processed_text) |> Enum.at(0) |> String.trim("\"")
   end
 end
