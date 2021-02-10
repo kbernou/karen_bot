@@ -7,7 +7,7 @@ not.
 ## Installation
 Clone the repo.  
 Create `config/config.exs` ([example](#Example-Config) below)  
-Enter the bot's token in `/config/config.exs`.  
+Enter the bot's token in `config/config.exs`.  
 Get dependencies with `mix deps.get`.  
 Run the application.
 
