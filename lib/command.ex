@@ -36,7 +36,7 @@ Feels like there's a better way to handle this...
       AtMe.handle(msg)
     else
       IO.puts("Command issued: #{cmd}")
-    Api.create_message(msg.channel_id, "That's not something I can do.")
+      Api.create_message(msg.channel_id, "That's not something I can do.")
     end
   end
 end
